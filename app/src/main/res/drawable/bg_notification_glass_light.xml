@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    v5: classic white-glass call card for light themes. Previously a soft
+    teal wash; now a clean near-white pane with a light grey edge, so it
+    matches White / Frost Glass instead of looking green.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="#FCFFFFFF"
+                android:centerColor="#FAFAFBFC"
+                android:endColor="#F7F2F4F7" />
+            <corners android:radius="24dp" />
+            <stroke android:width="1dp" android:color="#331C1C1E" />
+        </shape>
+    </item>
+    <item android:top="1dp" android:left="1dp" android:right="1dp" android:bottom="1dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:startColor="#22FFFFFF"
+                android:centerColor="#0AFFFFFF"
+                android:endColor="#00FFFFFF"
+                android:type="linear" />
+            <corners android:radius="23dp" />
+        </shape>
+    </item>
+    <item android:top="2dp" android:left="2dp" android:right="2dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <stroke android:width="1dp" android:color="#140F1720" />
+            <corners android:radius="22dp" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</layer-list>

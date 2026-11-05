@@ -1,0 +1,37 @@
+/*
+ * Ashu Phone
+ * Copyright (C) 2026 Ashutosh Nishad
+ *
+ * This file is part of Ashu Phone, licensed under the GNU General Public
+ * License, version 3 or (at your option) any later version.
+ * See the LICENSE file in the project root. This program comes with ABSOLUTELY NO WARRANTY.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+package com.ashudialer.app.data.db
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface LockedNumberDao {
+
+    @Query("SELECT * FROM locked_numbers ORDER BY addedAtMillis DESC")
+    fun observeAll(): Flow<List<LockedNumberEntity>>
+
+    @Query("SELECT * FROM locked_numbers")
+    suspend fun getAllSnapshot(): List<LockedNumberEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(entity: LockedNumberEntity)
+
+    @Delete
+    suspend fun delete(entity: LockedNumberEntity)
+
+    @Query("DELETE FROM locked_numbers WHERE phoneNumber = :phoneNumber")
+    suspend fun deleteByNumber(phoneNumber: String)
+}
