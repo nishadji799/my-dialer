@@ -458,7 +458,7 @@ fun DialerScreen(
         // The typed number: fixed height, centred, directly above the chips row and the keys.
         // v5: a soft translucent pill behind the digits keeps them readable against any wallpaper
         // or glass background (the "numbers not visible" report) without adding a heavy card.
-        Spacer(Modifier.height(numberGap.dp))
+        Spacer(Modifier.height(numberGap))
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -473,7 +473,7 @@ fun DialerScreen(
             // cursor and re-scrolled itself to keep that cursor "in view", which is what made the
             // digits shimmy sideways on every press. Display-only text cannot do that.
             Text(
-                text = numberField,
+                text = numberField.text,
                 fontSize = numberFont.sp,
                 fontWeight = FontWeight.Light,
                 color = palette.textPrimary,
