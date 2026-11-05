@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
-    id("com.google.gms.google-services")
+    id("com.google.gms.google-services") apply false
 }
 
 
@@ -61,10 +61,18 @@ tasks.register("checkGoogleServicesPackageName") {
     }
 }
 
-tasks.matching { it.name == "processDebugGoogleServices" || it.name == "processReleaseGoogleServices" }
-    .configureEach {
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+
+    tasks.matching {
+        it.name == "processDebugGoogleServices" ||
+        it.name == "processReleaseGoogleServices"
+    }.configureEach {
         dependsOn("checkGoogleServicesPackageName")
     }
+} else {
+    logger.lifecycle("Firebase configuration absent: building without Google Services.")
+}
 
 android {
     namespace = "com.ashudialer.app"
